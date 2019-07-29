@@ -101,13 +101,21 @@ def start_date(start):
     end_date = session.query(func.max(Measurement.date)).all()[0][0]
     temps = calc_temps(start,end_date)
     temps_list = list(np.ravel(temps))
-    return jsonify(temps_list)
+    return (
+        f"Lowest Temperature: {temps_list[0]}<br/>"
+        f"Average Temperature: {temps_list[1]}<br/>"
+        f"Highest Temperature: {temps_list[2]}<br/>"
+    )
 
 @app.route("/api/v1.0/<start>/<end>")
 def start_end(start,end):   
     temps = calc_temps(start,end)
     temps_list = list(np.ravel(temps))
-    return jsonify(temps_list)
+    return (
+        f"Lowest Temperature: {temps_list[0]}<br/>"
+        f"Average Temperature: {temps_list[1]}<br/>"
+        f"Highest Temperature: {temps_list[2]}<br/>"
+    )
 
 
 if __name__ == '__main__':
